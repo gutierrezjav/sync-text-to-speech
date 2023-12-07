@@ -21,14 +21,22 @@ const idx = lunr(function () {
 });
 console.log("Index created");
 
-// const searchTerm =  "alcoholism is said to happen when the following conditions exist"; // 414
-// const searchTerm = "increases sales of their product"; //353
 const searchTerm =
-  "drink in the oriental part of the Himalaya mountains and also in China"; // 398 and 399
+  "when the following conditions exist alcoholism is said to happen"; // 414
+// const searchTerm = "alcoholism is said to happen when the following conditions exist"; // 414
+// const searchTerm = "increases sales of their product"; //353
+//const searchTerm ="drink in the oriental part of the Himalaya mountains and also in China"; // 398 and 399
 
-const res = idx.search(searchTerm)[0];
-console.log("search results", JSON.stringify(res));
+console.log("");
+console.log(`Searching for: '${searchTerm}'`);
+const res = idx.search(searchTerm);
+console.log(
+  "Top 5 search results scores",
+  res.slice(0, 5).map((r) => {
+    return { line: 1 + parseInt(r.ref), score: r.score };
+  })
+);
+console.log("");
 
-const line = parseInt(res.ref);
-console.log(`Match found in line ${line + 1}`);
-console.log(`Line 414: '${textLines[line]}'`);
+const line = parseInt(res[0].ref);
+console.log(`Match found in line ${line + 1}: '${textLines[line]}'`);
