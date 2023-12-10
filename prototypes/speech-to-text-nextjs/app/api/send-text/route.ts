@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 let textLines: string[];
 try {
-  const data = fs.readFileSync("../text/beer_es.txt", "utf8");
+  const data = fs.readFileSync("../../text/beer_es.txt", "utf8");
   console.log(data.length);
   textLines = data.split("\n");
   console.log(textLines.length, "lines of text");

@@ -1,7 +1,7 @@
 const fs = require("node:fs");
 let textLines;
 try {
-  const data = fs.readFileSync("../text/beer_en.txt", "utf8");
+  const data = fs.readFileSync("../../text/beer_en.txt", "utf8");
   console.log(data.length);
   textLines = data.split("\n");
   console.log(textLines.length, "lines of text");
