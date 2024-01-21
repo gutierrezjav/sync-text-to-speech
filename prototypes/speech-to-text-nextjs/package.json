@@ -13,6 +13,7 @@
     "@svgr/webpack": "^8.1.0",
     "@types/lunr": "^2.3.7",
     "@uidotdev/usehooks": "^2.4.1",
+    "@vercel/kv": "^1.0.1",
     "lunr": "^2.3.9",
     "next": "14.0.1",
     "react": "^18",

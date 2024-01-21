@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import lunr from "lunr";
 import { NextResponse } from "next/server";
+import { kv } from "@vercel/kv";
 
 let textLines: string[];
 try {
@@ -32,10 +33,19 @@ export async function POST(request: Request) {
     if (res && res.length && res.length > 0) {
       const line = parseInt(res[0].ref);
       console.log(`Match found in line ${line + 1}'`);
+      saveLineNumber(line);
     } else {
       console.log("Match not found.");
     }
   }
 
   return NextResponse.json("", { status: 200, statusText: "OK" });
+}
+function saveLineNumber(line: number) {
+  // fs.writeFileSync(
+  //   "./app/api/lineNumber.json",
+  //   JSON.stringify({ lineNumber: line }),
+  //   "utf8"
+  // );
+  kv.set("lineNumber", line);
 }
