@@ -39,7 +39,7 @@ export default function ScrollingText({ language }: ScrollingTextProps) {
   }, [lineNumber, autoScroll]);
 
   if (textResult.isLoading) {
-    return <div>Loading text...</div>;
+    return <div>Loading text now...</div>;
   }
   if (textResult.error) {
     return <div>{textResult.error}</div>;
