@@ -42,10 +42,5 @@ export async function POST(request: Request) {
   return NextResponse.json("", { status: 200, statusText: "OK" });
 }
 function saveLineNumber(line: number) {
-  // fs.writeFileSync(
-  //   "./app/api/lineNumber.json",
-  //   JSON.stringify({ lineNumber: line }),
-  //   "utf8"
-  // );
   kv.set("lineNumber", line);
 }
