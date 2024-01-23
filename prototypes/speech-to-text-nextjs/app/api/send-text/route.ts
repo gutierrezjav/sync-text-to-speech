@@ -2,10 +2,13 @@ import fs from "node:fs";
 import lunr from "lunr";
 import { NextResponse } from "next/server";
 import { kv } from "@vercel/kv";
+import path from "node:path";
 
 let textLines: string[];
 try {
-  const data = fs.readFileSync("../../text/beer_es.txt", "utf8");
+  const filePath = path.join(process.cwd(), "../../text/beer_es.txt");
+  console.log("Initializing from path", filePath);
+  const data = fs.readFileSync(filePath, "utf8");
   console.log(data.length);
   textLines = data.split("\n");
   console.log(textLines.length, "lines of text");
