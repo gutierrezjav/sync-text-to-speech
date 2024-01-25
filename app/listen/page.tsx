@@ -1,4 +1,4 @@
-import Microphone from "../components/microphone";
+import Microphone from "../../components/microphone/microphone";
 
 export default function Listen() {
   return (

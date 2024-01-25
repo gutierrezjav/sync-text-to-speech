@@ -32,7 +32,6 @@ Tool to display a text, with line markers and synchronize the text position to l
 In Visual Studio, open terminal.
 
 ```
-> cd prototypes/speech-to-text-nextjs
 > npm install
 > npm run dev
 ```

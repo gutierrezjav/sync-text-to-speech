@@ -6,7 +6,7 @@ import path from "node:path";
 
 let textLines: string[];
 try {
-  const filePath = path.join(process.cwd(), "../../text/beer_es.txt");
+  const filePath = path.join(process.cwd(), "public/text/beer_es.txt");
   console.log("Initializing from path", filePath);
   const data = fs.readFileSync(filePath, "utf8");
   console.log(data.length);
