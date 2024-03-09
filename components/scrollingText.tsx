@@ -3,15 +3,20 @@
 import useSWR from "swr";
 import { useEffect, useState } from "react";
 import { kv } from "@vercel/kv";
+import { translations } from "@/app/[language]/translations";
 
 type ScrollingTextProps = {
   language: "es" | "it" | "en";
+  autoScroll: boolean;
 };
 const textFetcher = (url: string) => fetch(url).then((r) => r.text());
 
-export default function ScrollingText({ language }: ScrollingTextProps) {
+export default function ScrollingText({
+  language,
+  autoScroll,
+}: ScrollingTextProps) {
   const [lineNumber, setLineNumber] = useState(0);
-  const [autoScroll, setAutoScroll] = useState(true);
+
   const textResult = useSWR(`/text/beer_${language}.txt`, textFetcher);
 
   useEffect(() => {
@@ -39,7 +44,7 @@ export default function ScrollingText({ language }: ScrollingTextProps) {
   }, [lineNumber, autoScroll]);
 
   if (textResult.isLoading) {
-    return <div>Loading text...</div>;
+    return <div>{translations[language].loading}</div>;
   }
   if (textResult.error) {
     return <div>{textResult.error}</div>;
@@ -53,29 +58,13 @@ export default function ScrollingText({ language }: ScrollingTextProps) {
       <div
         id={`line-${num}`}
         key={num}
-        className={`flex flex-row gap-2 place-content-start ${
-          lineNumber >= num ? "text-black" : "text-white"
+        className={`flex flex-row gap-2 place-content-start leading-loose text-black ${
+          lineNumber > num ? "text-opacity-90 " : "text-opacity-20 "
         }`}
       >
-        <span>{lineNumber === num ? ">" : ""}</span>
-        <span>{num}</span>
         <span>{line}</span>
       </div>
     );
   };
-  return (
-    <>
-      <div className="py-4">
-        <input
-          type="checkbox"
-          checked={autoScroll}
-          onChange={(ev) => setAutoScroll(ev.target.checked)}
-        ></input>
-        <span className="px-4">Auto-scroll</span>
-      </div>
-      <div className="font-sans font-semibold text-lg">
-        {textResult.data?.split("\n").map(renderLine)}
-      </div>
-    </>
-  );
+  return <div>{textResult.data?.split("\n").map(renderLine)}</div>;
 }

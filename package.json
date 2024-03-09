@@ -10,12 +10,17 @@
   },
   "dependencies": {
     "@deepgram/sdk": "^3.0.0-beta.2",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.0",
+    "@fontsource/roboto": "^5.0.12",
+    "@mui/material": "^5.15.12",
     "@svgr/webpack": "^8.1.0",
     "@types/lunr": "^2.3.7",
     "@uidotdev/usehooks": "^2.4.1",
     "@vercel/kv": "^1.0.1",
     "lunr": "^2.3.9",
     "next": "14.0.1",
+    "prettier": "^3.2.5",
     "react": "^18",
     "react-dom": "^18",
     "swr": "^2.2.4"
