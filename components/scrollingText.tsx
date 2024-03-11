@@ -26,7 +26,7 @@ export default function ScrollingText({
         .then((res) => res.lineNumber as number)
         .then((lineNumber) => {
           console.log("Returned", lineNumber);
-          setLineNumber(lineNumber);
+          setLineNumber(lineNumber + 1);
         });
     };
     const interval = setInterval(() => getLineNumber(), 1000);

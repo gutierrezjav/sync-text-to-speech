@@ -106,7 +106,7 @@ export default function Microphone() {
           .join(" ");
         if (caption !== "") {
           setCaption(caption);
-          fetch("/api/send-text", {
+          fetch("/api/find-line-number", {
             method: "POST",
             body: JSON.stringify({
               text: caption,
