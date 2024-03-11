@@ -14,6 +14,7 @@ import Image from "next/image";
 
 export default function Microphone() {
   const { add, remove, first, size, queue } = useQueue<any>([]);
+  const [wordList, setWordList] = useState<string[]>([]);
   const [apiKey, setApiKey] = useState<CreateProjectKeyResponse | null>();
   const [connection, setConnection] = useState<LiveClient | null>();
   const [isListening, setListening] = useState(false);
@@ -100,18 +101,23 @@ export default function Microphone() {
       });
 
       connection.on(LiveTranscriptionEvents.Transcript, (data) => {
-        const words = data.channel.alternatives[0].words;
-        const caption = words
-          .map((word: any) => word.punctuated_word ?? word.word)
-          .join(" ");
-        if (caption !== "") {
-          setCaption(caption);
+        const words: string[] = data.channel.alternatives[0].words.map(
+          (w: any) => w.punctuated_word ?? w.word
+        );
+        let combinedWords = wordList.concat(words);
+        if (combinedWords.length > 6) {
+          setWordList([]);
+          const sentence = combinedWords.join(" ");
+          setCaption(sentence);
           fetch("/api/find-line-number", {
             method: "POST",
             body: JSON.stringify({
-              text: caption,
+              text: sentence,
             }),
           });
+        } else {
+          console.log("waiting for more text...");
+          setWordList(wordList.concat(...words));
         }
       });
 
